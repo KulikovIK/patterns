@@ -16,5 +16,5 @@ fronts = [secret_front, other_front]
 
 routers = {
     '/': Index(),
-    '/con/': Contacts()
+    '/contacts/': Contacts()
 }
