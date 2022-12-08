@@ -12,7 +12,12 @@ def other_front(request):
     request['key'] = 'key'
 
 
-fronts = [secret_front, other_front]
+def navigation_front(request):
+    urls = {item.__class__.__name__.lower(): key for key, item in routers.items()}
+    request['urls'] = urls
+
+
+fronts = [secret_front, other_front, navigation_front]
 
 routers = {
     '/': Index(),

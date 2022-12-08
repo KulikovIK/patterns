@@ -20,7 +20,6 @@ class Framework:
 
         # находим нужный контроллер
         # отработка паттерна page controller
-        print(path)
         if path in self.routers_list:
             view = self.routers_list[path]
         else:
