@@ -8,6 +8,7 @@
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
   <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
 </head>
+<h1>{{ urls }}</h1>
 <body>
   <div id="main">
     <div id="header">
@@ -28,9 +29,9 @@
             <li>
           {% endif %}
             <a href="{{ urls.index }}">Home</a></li>
-          <li><a href="examples.html">Examples</a></li>
-          <li><a href="page.html">A Page</a></li>
-          <li><a href="another_page.html">Another Page</a></li>
+          <li><a href="{{ urls.example }}">Examples</a></li>
+          <li><a href="{{ urls.page }}">A Page</a></li>
+          <li><a href="{{ urls.anotherpage }}">Another Page</a></li>
           {% if name == 'contacts' %}
             <li class="selected" >
           {% else %}

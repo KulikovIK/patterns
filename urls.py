@@ -1,6 +1,6 @@
 from datetime import date
 
-from view import Index, Contacts
+from view import Index, Example, Page, AnotherPage, Contacts
 
 
 # front-controller
@@ -21,5 +21,8 @@ fronts = [secret_front, other_front, navigation_front]
 
 routers = {
     '/': Index(),
-    '/contacts/': Contacts()
+    '/examples/': Example(),
+    '/page/': Page(),
+    '/another_page/': AnotherPage(),
+    '/contacts/': Contacts(),
 }
