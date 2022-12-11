@@ -9,3 +9,4 @@ __pycache__
 *.sqlite
 
 db.sqlite3
+log_file.txt
