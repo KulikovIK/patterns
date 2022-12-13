@@ -1,7 +1,7 @@
 from wsgiref.simple_server import make_server
 
 from simple_framework.main import Framework
-from urls import routers, fronts
+from simple_framework.core.front_controller import routers, fronts
 
 application = Framework(routers, fronts)
 

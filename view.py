@@ -1,31 +1,21 @@
-from simple_framework.templator import render
+from simple_framework.core.view import View
 
 
-class BaseView:
-    template_name = None
-
-    def __call__(self, request):
-        return '200 OK', render(self.template_name,
-                                date=request.get('date', None),
-                                urls=request.get('urls', None),
-                                name=self.__class__.__name__.lower())
-
-
-class Index(BaseView):
+class Index(View):
     template_name = 'index.html'
 
 
-class Example(BaseView):
+class Example(View):
     template_name = 'examples.html'
 
 
-class Page(BaseView):
+class Page(View):
     template_name = 'page.html'
 
 
-class AnotherPage(BaseView):
+class AnotherPage(View):
     template_name = 'another_page.html'
 
 
-class Contacts:
+class Contacts(View):
     template_name = 'contact.html'

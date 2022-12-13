@@ -5,10 +5,9 @@
   <title>{% block title %}colour_blue{% endblock %}</title>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
-  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" title="style" />
 </head>
-<h1>{{ urls }}</h1>
 <body>
   <div id="main">
     <div id="header">
@@ -23,20 +22,16 @@
         <ul id="menu">
 
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          {% if name == 'index' %}
-            <li class="selected" >
-          {% else %}
-            <li>
-          {% endif %}
+
+          <li class="{% if name == 'index' %}selected{% endif %}" >
             <a href="{{ urls.index }}">Home</a></li>
-          <li><a href="{{ urls.example }}">Examples</a></li>
-          <li><a href="{{ urls.page }}">A Page</a></li>
-          <li><a href="{{ urls.anotherpage }}">Another Page</a></li>
-          {% if name == 'contacts' %}
-            <li class="selected" >
-          {% else %}
-            <li>
-          {% endif %}
+          <li class="{% if name == 'example' %}selected{% endif %}" >
+            <a href="{{ urls.example }}">Examples</a></li>
+          <li class="{% if name == 'page' %}selected{% endif %}" >
+            <a href="{{ urls.page }}">A Page</a></li>
+          <li class="{% if name == 'anotherpage' %}selected{% endif %}" >
+            <a href="{{ urls.anotherpage }}">Another Page</a></li>
+          <li class="{% if name == 'contacts' %}selected{% endif %}" >
           <a href="{{ urls.contacts }}">Contact Us</a></li>
         </ul>
       </div>
