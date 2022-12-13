@@ -1,4 +1,4 @@
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, Template
 from os.path import join
 
 
@@ -18,7 +18,7 @@ def render(template_name, folder='templates', **kwargs):
 
     # Работа с шаблонами
     env = Environment(loader=FileSystemLoader(folder))
-    template = env.get_template(template_name)
+    template = env.get_or_select_template(template_name)
 
     # рендеринг шаблона с параметрами
     return template.render(**kwargs)
