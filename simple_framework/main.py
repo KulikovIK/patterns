@@ -1,5 +1,6 @@
 from quopri import decodestring
 
+from simple_framework.contenttype_handler import get_content
 from simple_framework.request_handlers import GetRequests, PostRequests
 from simple_framework.utils.simple_loger import print_log
 
@@ -38,11 +39,12 @@ class Framework:
             request['request_params'] = Framework.decode_value(request_params)
 
         print_log(method, request.get("request_params"))
-
         # находим нужный контроллер
         # отработка паттерна page controller
         if path in self.routers_list:
             view = self.routers_list[path]
+        elif path.endswith('.css/'):
+            view = self.routers_list['/css/']
         else:
             view = PageNotFound404()
 
@@ -53,10 +55,7 @@ class Framework:
         for front_item in self.fronts_list:
             front_item(request)
 
-        # запуск контроллера с передачей объекта request
-        code, body = view(request)
-        start_response(code, [('Content-Type', 'text/html')])
-        return [body.encode('utf-8')]
+        return get_content(start_response, request, path, view)
 
     @staticmethod
     def decode_value(data: dict) -> dict:

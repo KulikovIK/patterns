@@ -30,7 +30,7 @@ class PostRequests(BaseRequest):
         # получение длины тела
         content_length_data = environ.get('CONTENT_LENGTH')
         content_length = int(content_length_data) if content_length_data else 0
-        print(content_length)
+        # print(content_length)
 
         return environ.get('wsgi.input').read(content_length) if content_length else b''
 
@@ -39,7 +39,7 @@ class PostRequests(BaseRequest):
         if data:
             # декодирование данных
             decoded_data = data.decode(encoding='utf-8')
-            print(f'строка после декодирования - {decoded_data}')
+            # print(f'строка после декодирования - {decoded_data}')
             result = PostRequests.parse_input_data(decoded_data)
         return result
 
