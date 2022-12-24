@@ -2,7 +2,7 @@ from quopri import decodestring
 
 from simple_framework.contenttype_handler import get_content
 from simple_framework.request_handlers import GetRequests, PostRequests
-from simple_framework.utils.simple_loger import print_log
+from simple_framework.utils.simple_loger import Loger1
 
 
 class PageNotFound404:
@@ -38,7 +38,9 @@ class Framework:
             request_params = PostRequests().get_request_params(environ)
             request['request_params'] = Framework.decode_value(request_params)
 
-        print_log(method, request.get("request_params"))
+        loger = Loger1()
+        loger.print_log(method, request.get("request_params"))
+
         # находим нужный контроллер
         # отработка паттерна page controller
         if path in self.routers_list:
