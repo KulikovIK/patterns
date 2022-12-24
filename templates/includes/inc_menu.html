@@ -4,14 +4,14 @@
         <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
 
         <li class="{% if name == 'index' %}selected{% endif %}">
-            <a href="{{ urls.index }}">Home</a></li>
-        <li class="{% if name == 'example' %}selected{% endif %}">
-            <a href="{{ urls.example }}">Examples</a></li>
-        <li class="{% if name == 'page' %}selected{% endif %}">
-            <a href="{{ urls.page }}">A Page</a></li>
-        <li class="{% if name == 'anotherpage' %}selected{% endif %}">
-            <a href="{{ urls.anotherpage }}">Another Page</a></li>
-        <li class="{% if name == 'contacts' %}selected{% endif %}">
-            <a href="{{ urls.contacts }}">Contact Us</a></li>
+            <a href="{{ urls.index }}">Главная</a></li>
+        <li class="{% if name == 'about' %}selected{% endif %}">
+            <a href="{{ urls.about }}">О нас</a></li>
+        <li class="{% if name == 'studyprograms' %}selected{% endif %}">
+            <a href="{{ urls.studyprograms }}">Программы обучения</a></li>
+        <li class="{% if name == 'courseslist' %}selected{% endif %}">
+            <a href="{{ urls.courseslist }}">Список курсов</a></li>
+        <li class="{% if name == 'categorylist' %}selected{% endif %}">
+            <a href="{{ urls.categorylist }}">Список категорий</a></li>
     </ul>
 </div>

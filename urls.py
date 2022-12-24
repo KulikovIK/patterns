@@ -1,9 +1,12 @@
-from view import Index, Example, Page, AnotherPage, Contacts
+from view import Index, About, StudyPrograms, CoursesList, \
+    CreateCourse, CreateCategory, CategoryList
 
 routers = {
     '/': Index(),
-    '/examples/': Example(),
-    '/page/': Page(),
-    '/another_page/': AnotherPage(),
-    '/contacts/': Contacts(),
+    '/about/': About(),
+    '/study_programs/': StudyPrograms(),
+    '/courses-list/': CoursesList(),
+    '/create-course/': CreateCourse(),
+    '/create-category/': CreateCategory(),
+    '/category-list/': CategoryList(),
 }
