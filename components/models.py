@@ -1,5 +1,6 @@
-import quopri
+import abc
 import copy
+import quopri
 
 
 class User:
@@ -59,7 +60,13 @@ class CourseFactory:
         return cls.types.get(type_)(name, category)
 
 
-class Category:
+class Catalog(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def list_children(self):
+        pass
+
+
+class Category(Catalog):
     auto_id = 0
 
     def __init__(self, name, category):
@@ -67,6 +74,8 @@ class Category:
         Category.auto_id += 1
         self.name = name
         self.category = category
+        self.categories = {}
+        self._children = []
         self.courses = []
 
     def course_count(self):
@@ -74,6 +83,13 @@ class Category:
         if self.category:
             result += self.category.course_count()
         return result
+
+    def list_children(self):
+        return self._children
+
+    def append(self, cls):
+        if isinstance(cls, Catalog):
+            self._children.append(cls)
 
 
 class Engine:
