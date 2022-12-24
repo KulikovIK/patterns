@@ -1,4 +1,5 @@
 import quopri
+import copy
 
 
 class User:
@@ -24,7 +25,14 @@ class UserFactory:
         return cls.types.get(type_is)()
 
 
-class Course:
+class CoursePrototype:
+    # прототип курсов обучения
+
+    def clone(self):
+        return copy.deepcopy(self)
+
+
+class Course(CoursePrototype):
 
     def __init__(self, name, category):
         self.name = name

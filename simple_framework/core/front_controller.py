@@ -1,5 +1,6 @@
 from datetime import date
-from urls import routers
+# from urls import routers
+from views import routers
 from simple_framework.core.view import Static
 
 

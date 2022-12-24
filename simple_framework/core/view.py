@@ -1,5 +1,6 @@
 from components.models import Engine
 from simple_framework.core.templator import render, render_css
+from simple_framework.utils.decorators import Debug
 
 site = Engine()
 
@@ -7,6 +8,7 @@ site = Engine()
 class View:
     template_name = None
 
+    @Debug(name=None)
     def __call__(self, request):
         return '200 OK', render(self.template_name,
                                 date=request.get('date', None),
@@ -17,6 +19,7 @@ class View:
 class ListView:
     template_name = None
 
+    @Debug(name=None)
     def __call__(self, request):
         return '200 OK', render(self.template_name,
                                 date=request.get('date', None),
