@@ -1,6 +1,6 @@
+from components.behavioral_patterns import EmailNotifier, SmsNotifier, BaseSerializer
 from simple_framework.core.view import View, ListView, CreateView, site, render
 from simple_framework.utils.decorators import AppRoute, Debug
-from components.behavioral_patterns import EmailNotifier, SmsNotifier, BaseSerializer
 from simple_framework.utils.simple_loger import Logger
 
 routers = {}
@@ -11,16 +11,22 @@ sms_notifier = SmsNotifier()
 
 @AppRoute(routers=routers, url='/')
 class Index(ListView):
+    queryset = site.categories
     template_name = 'index.html'
+
+    def __call__(self, *args, **kwargs):
+        logger.log('Главная')
+        return super().__call__(*args)
 
 
 @AppRoute(routers=routers, url='/category-list/')
 class CategoryList(ListView):
+    queryset = site.categories
     template_name = 'category_list.html'
 
     def __call__(self, *args, **kwargs):
-        logger.log('Список категорий')
-        super().__call__(*args, **kwargs)
+        logger.log('Список категорй')
+        return super().__call__(*args)
 
 
 @AppRoute(routers=routers, url='/about/')
@@ -149,10 +155,15 @@ class CopyCourse:
         except KeyError:
             return '200 OK', 'No courses have been added yet'
 
+
 @AppRoute(routers=routers, url='/student-list/')
 class StudentListView(ListView):
     queryset = site.students
     template_name = 'student_list.html'
+
+    def __call__(self, *args, **kwargs):
+        logger.log('Список студенков')
+        return super().__call__(*args)
 
 
 @AppRoute(routers=routers, url='/create-student/')
