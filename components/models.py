@@ -1,3 +1,5 @@
+import abc
+import copy
 import quopri
 
 
@@ -24,7 +26,14 @@ class UserFactory:
         return cls.types.get(type_is)()
 
 
-class Course:
+class CoursePrototype:
+    # прототип курсов обучения
+
+    def clone(self):
+        return copy.deepcopy(self)
+
+
+class Course(CoursePrototype):
 
     def __init__(self, name, category):
         self.name = name
@@ -51,7 +60,13 @@ class CourseFactory:
         return cls.types.get(type_)(name, category)
 
 
-class Category:
+class Catalog(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def list_children(self):
+        pass
+
+
+class Category(Catalog):
     auto_id = 0
 
     def __init__(self, name, category):
@@ -59,6 +74,8 @@ class Category:
         Category.auto_id += 1
         self.name = name
         self.category = category
+        self.categories = {}
+        self._children = []
         self.courses = []
 
     def course_count(self):
@@ -66,6 +83,13 @@ class Category:
         if self.category:
             result += self.category.course_count()
         return result
+
+    def list_children(self):
+        return self._children
+
+    def append(self, cls):
+        if isinstance(cls, Catalog):
+            self._children.append(cls)
 
 
 class Engine:

@@ -12,13 +12,14 @@
         {% for item in objects_list %}
         <li>
             {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
+            <a href="/create-course/?id={{ item.id }}">Создать курс</a>
+            <p><a href="/courses-list/?id={{ item.id }}">Список курсов</a></p>
+            <p><a href="/create-category/?category_id={{item.id}}">Создать подкатегорию</a></p>
+
         </li>
         {% endfor %}
     </ul>
 
-	<div>
-		<li><a href="/courses-list/">Список курсов</a></li>
-		<li><a href="/create-course/">Создать курс</a></li>
-	</div>
+
 </div>
 {% endblock content %}
