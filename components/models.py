@@ -1,10 +1,11 @@
 import abc
 import copy
 import quopri
-
+from .behavioral_patterns import Subject
 
 class User:
-    pass
+    def __init__(self, name):
+        self.name = name
 
 
 class Teacher(User):
@@ -12,7 +13,9 @@ class Teacher(User):
 
 
 class Student(User):
-    pass
+    def __init__(self, name):
+        self.courses = []
+        super().__init__(name)
 
 
 class UserFactory:
@@ -22,8 +25,8 @@ class UserFactory:
     }
 
     @classmethod
-    def create(cls, type_is):
-        return cls.types.get(type_is)()
+    def create(cls, type_is, name):
+        return cls.types.get(type_is)(name)
 
 
 class CoursePrototype:
@@ -33,12 +36,22 @@ class CoursePrototype:
         return copy.deepcopy(self)
 
 
-class Course(CoursePrototype):
+class Course(CoursePrototype, Subject):
 
     def __init__(self, name, category):
         self.name = name
         self.category = category
         self.category.courses.append(self)
+        self.students = []
+        super().__init__()
+
+    def __getitem__(self, item):
+        return self.students[item]
+
+    def add_student(self, student: Student):
+        self.students.append(student)
+        student.courses.append(self)
+        self.notify()
 
 
 class InteractiveCourse(Course):
@@ -100,8 +113,8 @@ class Engine:
         self.categories = []
 
     @staticmethod
-    def create_user(type_):
-        return UserFactory.create(type_)
+    def create_user(type_, name):
+        return UserFactory.create(type_, name)
 
     @staticmethod
     def create_category(name, category=None):
@@ -123,6 +136,11 @@ class Engine:
             if course.name == name:
                 return course
         return None
+
+    def get_student(self, name) -> Student:
+        for student in self.students:
+            if student.name == name:
+                return student
 
     @staticmethod
     def decode_value(val):
