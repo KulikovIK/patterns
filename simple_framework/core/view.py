@@ -1,9 +1,11 @@
-from components.models import Engine
+from components.models import Engine, MapperRegistry
 from simple_framework.core.templator import render, render_css
 from simple_framework.utils.decorators import Debug
+from components.arcitect_patterns import UnitOfWork
 
 site = Engine()
-
+UnitOfWork.new_thread()
+UnitOfWork.get_thread().set_mapper_register(MapperRegistry)
 
 class View:
     template_name = None

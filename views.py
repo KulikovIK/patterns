@@ -1,12 +1,16 @@
 from components.behavioral_patterns import EmailNotifier, SmsNotifier, BaseSerializer
+from components.models import MapperRegistry
 from simple_framework.core.view import View, ListView, CreateView, site, render
 from simple_framework.utils.decorators import AppRoute, Debug
 from simple_framework.utils.simple_loger import Logger
+# from components.arcitect_patterns import UnitOfWork
 
 routers = {}
 logger = Logger('main')
 email_notifier = EmailNotifier()
 sms_notifier = SmsNotifier()
+# UnitOfWork.new_thread()
+# UnitOfWork.get_thread().set_mapper_register(MapperRegistry)
 
 
 @AppRoute(routers=routers, url='/')
@@ -164,6 +168,10 @@ class StudentListView(ListView):
     def __call__(self, *args, **kwargs):
         logger.log('Список студенков')
         return super().__call__(*args)
+
+    def get_queryset(self):
+        mapper = MapperRegistry.get_current_mapper('student')
+        return mapper.all()
 
 
 @AppRoute(routers=routers, url='/create-student/')
